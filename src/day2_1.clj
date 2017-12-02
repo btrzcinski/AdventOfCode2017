@@ -1,5 +1,4 @@
-(ns day2-1
-  (:require [clojure.string :as string]))
+(ns day2-1)
 
 (defn input-to-seqs [input]
   (map (fn [lines] (seq (map (fn [x] (Integer/parseInt x)) (.split lines "\t"))))

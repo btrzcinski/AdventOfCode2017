@@ -33,15 +33,13 @@
      (get-value matrix (dec x) y)
      (get-value matrix (dec x) (dec y))
      (get-value matrix x (dec y))
-     (get-value matrix (inc x) (dec y))
-     ))
+     (get-value matrix (inc x) (dec y))))
 
 (defn set-and-check [matrix x y n]
   (let [new-value (value-from-neighbors matrix x y)]
     (do
       (set-value matrix x y new-value)
-      (> new-value n)
-      )))
+      (> new-value n))))
 
 (defn spiral-towards [matrix n]
   (let [x (atom 1)
@@ -54,7 +52,7 @@
         (while (and (<= (get-value matrix @x @y) n) (> @y (- @i))) (if-not (set-and-check matrix @x @y n) (swap! y dec)))
         (while (and (<= (get-value matrix @x @y) n) (> @x (- @i))) (if-not (set-and-check matrix @x @y n) (swap! x dec)))
         (while (and (<= (get-value matrix @x @y) n) (< @y @i))     (if-not (set-and-check matrix @x @y n) (swap! y inc)))
-        (while (and (<= (get-value matrix @x @y) n) (<= @x @i))     (if-not (set-and-check matrix @x @y n) (swap! x inc)))
+        (while (and (<= (get-value matrix @x @y) n) (<= @x @i))    (if-not (set-and-check matrix @x @y n) (swap! x inc)))
         (swap! i inc)
         )
       )
@@ -67,7 +65,6 @@
 (doseq [n [806 265149]]
   (let [test-matrix (new-spiral-matrix)
         coords (spiral-towards test-matrix n)]
-    (prn coords (apply get-value test-matrix coords)))
-  )
+    (prn coords (apply get-value test-matrix coords))))
 
 

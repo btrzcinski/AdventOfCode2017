@@ -1,15 +1,14 @@
-(ns day4-1
+(ns day4-2
   (:require [clojure.string :as string])
   )
 
 (defn valid-passphrase? [passphrase]
-  (->>
-    (-> passphrase
-        (.split " ")
-        (frequencies)
-        (vals))
-    (reduce max)
-    (>= 1)))
+  (->> (.split passphrase " ")
+       (map #(apply str (sort %)))
+       (frequencies)
+       (vals)
+       (reduce max)
+       (>= 1)))
 
 (defn passphrases-from-file [file-input]
   (.split file-input "\n"))
@@ -21,9 +20,11 @@
   (apply + (map #(validity-to-number (valid-passphrase? %)) passphrases))
   )
 
-(doseq [x ["aa bb cc dd ee"
-           "aa bb cc dd aa"
-           "aa bb cc dd aaa"]]
+(doseq [x ["abcde fghij"
+           "abcde xyz ecdab"
+           "a ab abc abd abf abj"
+           "iiii oiii ooii oooi oooo"
+           "oiii ioii iioi iiio"]]
   (prn x (valid-passphrase? x)))
 
 (def file-input (string/trim (slurp "../data/day4-1.txt")))

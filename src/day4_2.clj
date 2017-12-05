@@ -20,12 +20,7 @@
   (apply + (map #(validity-to-number (valid-passphrase? %)) passphrases))
   )
 
-(doseq [x ["abcde fghij"
-           "abcde xyz ecdab"
-           "a ab abc abd abf abj"
-           "iiii oiii ooii oooi oooo"
-           "oiii ioii iioi iiio"]]
-  (prn x (valid-passphrase? x)))
+(defn -main []
+  (let [file-input (string/trim (slurp "data/day4-1.txt"))]
+    (prn (valid-passphrases (passphrases-from-file file-input)))))
 
-(def file-input (string/trim (slurp "../data/day4-1.txt")))
-(prn (valid-passphrases (passphrases-from-file file-input)))

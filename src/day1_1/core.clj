@@ -1,4 +1,4 @@
-(ns day1-1
+(ns day1-1.core
   (:require [clojure.string :as string])
   )
 
@@ -20,10 +20,12 @@
 (defn captcha-sum [input]
   (captcha-sum-from-seq (cons (last (input-to-seq input)) (input-to-seq input))))
 
-(prn (captcha-sum "1122"))
-(prn (captcha-sum "1111"))
-(prn (captcha-sum "1234"))
-(prn (captcha-sum "91212129"))
+(defn -main [& args]
+  (prn (captcha-sum "1122"))
+  (prn (captcha-sum "1111"))
+  (prn (captcha-sum "1234"))
+  (prn (captcha-sum "91212129"))
 
-(def file-input (string/trim (slurp "../data/day1-1.txt")))
-(prn (captcha-sum file-input))
+  (def file-input (string/trim (slurp "resources/day1-1.txt")))
+  (prn (captcha-sum file-input))
+  )
